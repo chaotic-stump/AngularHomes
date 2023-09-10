@@ -26,23 +26,24 @@ import { HousingLocationComponent } from '../housing-location/housing-location.c
 })
 export class HomeComponent {
 
-filterResults(text: string) {
-  if (!text) {
-    this.filteredLocationList = this.housingLocationList;
-  }
 
-  this.filteredLocationList = this.housingLocationList.filter(
-    housingLocation => housingLocation?.city.toLowerCase().includes(text.toLowerCase())
-  );
-}
 
   filteredLocationList: HousingLocation[] = [];
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
 
   constructor() {
-    this.filteredLocationList = this.housingLocationList;
     this.housingLocationList = this.housingService.getAllHousingLocations();
+    this.filteredLocationList = this.housingLocationList;
+  }
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredLocationList = this.housingLocationList;
+    }
+
+    this.filteredLocationList = this.housingLocationList.filter(
+      housingLocation => housingLocation?.city.toLowerCase().includes(text.toLowerCase())
+    );
   }
 
 }
